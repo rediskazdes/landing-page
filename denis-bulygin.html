@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Denis Bulygin — Product Owner v2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #0a0a0a;
+    --white: #ffffff;
+    --blue: #315DA6;
+    --blue-dark: #274d8c;
+    --blue-light: rgba(49,93,166,0.12);
+    --gray-50: #f9f9f9;
+    --gray-100: #f2f2f2;
+    --gray-200: #e5e5e5;
+    --gray-400: #315DA6;
+    --gray-600: #315DA6;
+    --radius: 12px;
+    --radius-sm: 8px;
+    --radius-pill: 100px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--white);
+    color: var(--black);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255,255,255,0.9);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--gray-200);
+    padding: 0 2rem;
+  }
+  .nav-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .nav-logo {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--black);
+    text-decoration: none;
+  }
+  .nav-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--black);
+    color: var(--white);
+    font-size: 14px;
+    font-weight: 500;
+    padding: 9px 20px;
+    border-radius: var(--radius-pill);
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+  .nav-cta:hover { opacity: 0.8; }
+
+  /* SECTIONS */
+  section { padding: 100px 2rem; }
+  .container { max-width: 1100px; margin: 0 auto; }
+
+  /* HERO */
+  .hero {
+    padding: 120px 2rem 100px;
+    text-align: center;
+  }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--blue-light);
+    color: var(--blue);
+    font-size: 13px;
+    font-weight: 500;
+    padding: 6px 16px;
+    border-radius: var(--radius-pill);
+    margin-bottom: 2rem;
+  }
+  .hero-badge .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #22c55e;
+  }
+  h1 {
+    font-size: clamp(40px, 6vw, 72px);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    margin-bottom: 1.5rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  h1 span { color: var(--blue); opacity: 0.5; }
+  .hero-sub {
+    font-size: 18px;
+    color: var(--blue);
+    max-width: 520px;
+    margin: 0 auto 2.5rem;
+    line-height: 1.6;
+  }
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--black);
+    color: var(--white);
+    font-size: 16px;
+    font-weight: 500;
+    padding: 14px 32px;
+    border-radius: var(--radius-pill);
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+  .hero-cta:hover { opacity: 0.8; }
+  .arrow { font-size: 18px; }
+
+  /* TRUSTED BY CAROUSEL */
+  .trusted-section {
+    padding: 40px 0;
+    border-top: 1px solid var(--gray-200);
+    border-bottom: 1px solid var(--gray-200);
+    overflow: hidden;
+  }
+  .trusted-label {
+    text-align: center;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--blue);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    opacity: 0.6;
+  }
+  .carousel-track-wrap {
+    position: relative;
+    overflow: hidden;
+  }
+  .carousel-track-wrap::before,
+  .carousel-track-wrap::after {
+    content: '';
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 120px;
+    z-index: 2;
+    pointer-events: none;
+  }
+  .carousel-track-wrap::before {
+    left: 0;
+    background: linear-gradient(to right, #fff 0%, transparent 100%);
+  }
+  .carousel-track-wrap::after {
+    right: 0;
+    background: linear-gradient(to left, #fff 0%, transparent 100%);
+  }
+  .carousel-track {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    width: max-content;
+    animation: scroll-logos 22s linear infinite;
+  }
+  .carousel-track:hover { animation-play-state: paused; }
+  @keyframes scroll-logos {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  .carousel-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 52px;
+    min-width: 180px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+  .carousel-logo {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--blue);
+    line-height: 1;
+    margin-bottom: 5px;
+  }
+  .carousel-sub {
+    font-size: 11px;
+    color: var(--blue);
+    opacity: 0.5;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+  }
+  .carousel-dot {
+    width: 1px;
+    height: 32px;
+    background: var(--gray-200);
+    flex-shrink: 0;
+  }
+
+  /* STATS */
+  .stats-section { background: var(--blue); }
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: rgba(255,255,255,0.2);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .stat-card {
+    background: var(--blue);
+    padding: 48px 40px;
+  }
+  .stat-num {
+    font-size: 52px;
+    font-weight: 600;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    margin-bottom: 12px;
+    color: var(--white);
+  }
+  .stat-label {
+    font-size: 14px;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.5;
+    max-width: 200px;
+  }
+
+  /* SECTION HEADINGS */
+  .section-eyebrow {
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 1rem;
+  }
+  .section-eyebrow.on-blue {
+    color: rgba(255,255,255,0.6);
+  }
+  h2 {
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+  }
+  .section-sub {
+    font-size: 17px;
+    color: var(--blue);
+    max-width: 500px;
+    line-height: 1.6;
+    margin-bottom: 3rem;
+  }
+
+  /* SERVICES */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  .service-card {
+    background: var(--gray-50);
+    border-radius: var(--radius);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    transition: background 0.2s;
+  }
+  .service-card:hover { background: var(--blue-light); }
+  .service-card.featured {
+    background: var(--blue);
+    color: var(--white);
+  }
+  .service-card.featured:hover { background: var(--blue-dark); }
+  .service-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-sm);
+    background: #e5e5e5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    margin-bottom: 1.25rem;
+    flex-shrink: 0;
+  }
+  .service-card.featured .service-icon {
+    background: rgba(255,255,255,0.15);
+  }
+  .service-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    background: rgba(255,255,255,0.15);
+    border-radius: var(--radius-pill);
+    margin-bottom: 1rem;
+    color: rgba(255,255,255,0.7);
+  }
+  .service-name {
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.5rem;
+  }
+  .service-tagline {
+    font-size: 14px;
+    color: var(--blue);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+  }
+  .service-card.featured .service-tagline { color: rgba(255,255,255,0.65); }
+  .service-divider {
+    height: 1px;
+    background: var(--gray-200);
+    margin-bottom: 1.5rem;
+  }
+  .service-card.featured .service-divider { background: rgba(255,255,255,0.15); }
+  .service-features { list-style: none; }
+  .service-features li {
+    font-size: 13px;
+    color: var(--blue);
+    padding: 5px 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    line-height: 1.4;
+  }
+  .service-card.featured .service-features li { color: rgba(255,255,255,0.7); }
+  .check { color: var(--blue); font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+  .service-card.featured .check { color: rgba(255,255,255,0.5); }
+  .service-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 13px;
+    font-weight: 500;
+    margin-top: 1.5rem;
+    text-decoration: none;
+    color: var(--black);
+  }
+  .service-card.featured .service-link { color: var(--white); }
+  .service-link:hover { opacity: 0.6; }
+
+  /* EXPERIENCE */
+  .experience-section { background: var(--blue); }
+  .exp-list { display: flex; flex-direction: column; gap: 0; }
+  .exp-item {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 3rem;
+    padding: 2.5rem 0;
+    border-top: 1px solid rgba(255,255,255,0.15);
+  }
+  .exp-item:first-child { border-top: none; }
+  .exp-meta { }
+  .exp-company {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: var(--white);
+  }
+  .exp-location {
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+  }
+  .exp-period {
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    margin-top: 2px;
+  }
+  .exp-role {
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin-bottom: 6px;
+    color: var(--white);
+  }
+  .exp-context {
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 1rem;
+  }
+  .exp-bullets { list-style: none; }
+  .exp-bullets li {
+    font-size: 14px;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.6;
+    padding: 4px 0;
+    padding-left: 1rem;
+    position: relative;
+  }
+  .exp-bullets li::before {
+    content: '–';
+    position: absolute;
+    left: 0;
+    color: rgba(255,255,255,0.35);
+  }
+
+  .experience-section h2 { color: var(--white); }
+  .experience-section .section-eyebrow { color: rgba(255,255,255,0.6); }
+
+  /* TEAM */
+  .team-section { background: var(--white); }
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 1.25rem;
+    margin-top: 2.5rem;
+  }
+  .team-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    min-width: 0;
+  }
+  .team-avatar {
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--gray-100);
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .team-avatar img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+  }
+  .team-avatar.claude-card {
+    background: var(--gray-100);
+    border: none;
+  }
+  .team-name {
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--black);
+    margin-bottom: 2px;
+  }
+  .team-role {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--blue);
+    line-height: 1.4;
+    text-align: center;
+  }
+  .team-placeholder {
+    width: 100%; height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--gray-100);
+  }
+
+  @media (max-width: 768px) {
+    .team-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  .tools-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 2rem;
+  }
+  .tool-tag {
+    font-size: 13px;
+    font-weight: 500;
+    padding: 7px 16px;
+    background: var(--gray-100);
+    border-radius: var(--radius-pill);
+    color: var(--blue);
+    font-family: 'SF Mono', 'Fira Code', monospace;
+  }
+
+  /* FINAL CTA */
+  .cta-section {
+    background: var(--black);
+    color: var(--white);
+    text-align: center;
+    padding: 120px 2rem;
+  }
+  .cta-section h2 { color: var(--white); margin-bottom: 1rem; }
+  .cta-section .section-sub { color: rgba(255,255,255,0.65); margin: 0 auto 2.5rem; }
+  .cta-email {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--white);
+    color: var(--black);
+    font-size: 16px;
+    font-weight: 500;
+    padding: 14px 32px;
+    border-radius: var(--radius-pill);
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+  .cta-email:hover { opacity: 0.85; }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--gray-200);
+    padding: 2rem;
+  }
+  .footer-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-copy { font-size: 13px; color: var(--blue); }
+  .footer-links { display: flex; gap: 1.5rem; }
+  .footer-links a {
+    font-size: 13px;
+    color: var(--blue);
+    text-decoration: none;
+  }
+  .footer-links a:hover { color: var(--black); }
+
+  /* FADE IN */
+  .fade { opacity: 1; transform: none; }
+
+  @media (max-width: 768px) {
+    h1 { font-size: 36px; }
+    h2 { font-size: 28px; }
+    .stats-grid { grid-template-columns: 1fr; }
+    .services-grid { grid-template-columns: 1fr; }
+    .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
+    .logos-grid { gap: 1.5rem; }
+    .hero { padding: 80px 1.5rem 60px; }
+    section { padding: 60px 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">Denis Bulygin</a>
+    <a href="mailto:bulygindi@gmail.com" class="nav-cta">Get in touch</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">
+    <span class="dot"></span>
+    Open to new opportunities · Amsterdam
+  </div>
+  <h1>Product thinking for platforms <span>that actually ship.</span></h1>
+  <p class="hero-sub">4+ years in product, 4 in data. I own marketplace platforms end-to-end — from discovery to delivery, across payments, integrations, and operations.</p>
+  <a href="mailto:bulygindi@gmail.com" class="hero-cta">
+    Say hello <span class="arrow">→</span>
+  </a>
+</section>
+
+<!-- TRUSTED BY -->
+<div class="trusted-section">
+  <p class="trusted-label">Trusted by</p>
+  <div class="carousel-track-wrap">
+    <div class="carousel-track" id="carousel">
+      <div class="carousel-item">
+        <div class="carousel-logo">SOUS</div>
+        <div class="carousel-sub">B2B2C Marketplace</div>
+      </div>
+      <div class="carousel-dot"></div>
+      <div class="carousel-item">
+        <div class="carousel-logo">TU Delft</div>
+        <div class="carousel-sub">Research University</div>
+      </div>
+      <div class="carousel-dot"></div>
+      <div class="carousel-item">
+        <div class="carousel-logo">HSE University</div>
+        <div class="carousel-sub">Higher School of Economics</div>
+      </div>
+      <div class="carousel-dot"></div>
+      <div class="carousel-item">
+        <div class="carousel-logo">ML & Social Lab</div>
+        <div class="carousel-sub">Research Group</div>
+      </div>
+      <div class="carousel-dot"></div>
+      <div class="carousel-item">
+        <div class="carousel-logo">Uppsala University</div>
+        <div class="carousel-sub">MSc HCI</div>
+      </div>
+      <div class="carousel-dot"></div>
+      <!-- duplicate set for seamless loop -->
+      <div class="carousel-item">
+        <div class="carousel-logo">SOUS</div>
+        <div class="carousel-sub">B2B2C Marketplace</div>
+      </div>
+      <div class="carousel-dot"></div>
+      <div class="carousel-item">
+        <div class="carousel-logo">TU Delft</div>
+        <div class="carousel-sub">Research University</div>
+      </div>
+      <div class="carousel-dot"></div>
+      <div class="carousel-item">
+        <div class="carousel-logo">HSE University</div>
+        <div class="carousel-sub">Higher School of Economics</div>
+      </div>
+      <div class="carousel-dot"></div>
+      <div class="carousel-item">
+        <div class="carousel-logo">ML & Social Lab</div>
+        <div class="carousel-sub">Research Group</div>
+      </div>
+      <div class="carousel-dot"></div>
+      <div class="carousel-item">
+        <div class="carousel-logo">Uppsala University</div>
+        <div class="carousel-sub">MSc HCI</div>
+      </div>
+      <div class="carousel-dot"></div>
+    </div>
+  </div>
+</div>
+
+<!-- STATS -->
+<section class="stats-section">
+  <div class="container fade">
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-num">99.9%</div>
+        <div class="stat-label">Payout accuracy across six-digit monthly volumes</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">+14%</div>
+        <div class="stat-label">B2C conversion lift from a 12-month CRO roadmap</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">180+</div>
+        <div class="stat-label">Students trained on NLP and large language models</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="team-section">
+  <div class="container fade">
+    <p class="section-eyebrow">The team</p>
+    <h2>Who you're hiring.</h2>
+    <p class="section-sub">A tight-knit group. Different strengths, shared commitment to shipping.</p>
+
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-avatar">
+          <img src="ceo.jpg" alt="CEO">
+        </div>
+        <div class="team-role">CEO</div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-avatar">
+          <div class="team-placeholder"><svg width="40%" height="40%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="4" fill="#c8c8c8"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="#c8c8c8" stroke-width="2" stroke-linecap="round"/></svg></div>
+        </div>
+        <div class="team-role">UX Designer</div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-avatar">
+          <div class="team-placeholder"><svg width="40%" height="40%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="4" fill="#c8c8c8"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="#c8c8c8" stroke-width="2" stroke-linecap="round"/></svg></div>
+        </div>
+        <div class="team-role">Product Lead</div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-avatar">
+          <div class="team-placeholder"><svg width="40%" height="40%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="4" fill="#c8c8c8"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="#c8c8c8" stroke-width="2" stroke-linecap="round"/></svg></div>
+        </div>
+        <div class="team-role">Software Developer</div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-avatar claude-card">
+          <div class="team-placeholder">
+            <svg width="40%" height="40%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="4" fill="#c8c8c8"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" stroke="#c8c8c8" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+        </div>
+        <div class="team-role">Claude</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section>
+  <div class="container fade">
+    <p class="section-eyebrow">Where I can help</p>
+    <h2>Pick your challenge.</h2>
+    <p class="section-sub">Whether you need a generalist or a specialist, here's what I bring to the table.</p>
+
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">🔀</div>
+        <div class="service-name">A bit of everything</div>
+        <p class="service-tagline">From backend scoping to email marketing — full-stack PM for lean, fast-moving teams.</p>
+        <div class="service-divider"></div>
+        <ul class="service-features">
+          <li><span class="check">✓</span>Discovery & requirements</li>
+          <li><span class="check">✓</span>Backlog & stakeholder alignment</li>
+          <li><span class="check">✓</span>CRO roadmaps & funnel analytics</li>
+          <li><span class="check">✓</span>Go-live planning & QA</li>
+          <li><span class="check">✓</span>Marketing & content product</li>
+        </ul>
+        <a href="mailto:bulygindi@gmail.com" class="service-link">Let's talk →</a>
+      </div>
+
+      <div class="service-card featured">
+        <div class="service-icon">⚡</div>
+        <span class="service-badge">Core strength</span>
+        <div class="service-name">Data integrations</div>
+        <p class="service-tagline">API contracts, webhooks, and third-party connectivity built to survive production.</p>
+        <div class="service-divider"></div>
+        <ul class="service-features">
+          <li><span class="check">✓</span>REST & GraphQL API design</li>
+          <li><span class="check">✓</span>BDD acceptance scenarios</li>
+          <li><span class="check">✓</span>POS, logistics & payment connectors</li>
+          <li><span class="check">✓</span>Exception-handling workflows</li>
+          <li><span class="check">✓</span>AI-assisted automation (n8n, Claude)</li>
+        </ul>
+        <a href="mailto:bulygindi@gmail.com" class="service-link">Let's talk →</a>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">💳</div>
+        <div class="service-name">Financial solutions</div>
+        <p class="service-tagline">Payout engines, reconciliation, and compliance flows for marketplace finance.</p>
+        <div class="service-divider"></div>
+        <ul class="service-features">
+          <li><span class="check">✓</span>Payout engine design</li>
+          <li><span class="check">✓</span>Stripe Connect ownership</li>
+          <li><span class="check">✓</span>Reconciliation at scale</li>
+          <li><span class="check">✓</span>Compliance & exception handling</li>
+          <li><span class="check">✓</span>Commerce flow architecture</li>
+        </ul>
+        <a href="mailto:bulygindi@gmail.com" class="service-link">Let's talk →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="experience-section">
+  <div class="container fade">
+    <p class="section-eyebrow">Experience</p>
+    <h2>The track record.</h2>
+
+    <div class="exp-list">
+      <div class="exp-item">
+        <div class="exp-meta">
+          <div class="exp-company">SOUS</div>
+          <div class="exp-location">Amsterdam</div>
+          <div class="exp-period">May 2024 – present</div>
+        </div>
+        <div>
+          <div class="exp-role">Product & Analytics Lead</div>
+          <div class="exp-context">Sole PM on a cross-functional team of 6–7 engineers, B2B2C food marketplace</div>
+          <ul class="exp-bullets">
+            <li>Owned end-to-end delivery of a payout engine connecting five systems via newly designed APIs and webhooks — 99.9% accuracy across six-digit monthly volumes</li>
+            <li>Reduced integration risk across 3 external POS and logistics partners by defining API contracts and BDD acceptance scenarios upfront</li>
+            <li>Drove a 14% conversion lift via a 12-month CRO roadmap built from CS ticket analysis and funnel data</li>
+            <li>Used AI tooling (Claude, n8n) to automate recurring analysis and documentation workflows, increasing throughput across discovery cycles</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-meta">
+          <div class="exp-company">TU Delft</div>
+          <div class="exp-location">Delft</div>
+          <div class="exp-period">Oct 2021 – Dec 2023</div>
+        </div>
+        <div>
+          <div class="exp-role">PhD Candidate — AI tools for research</div>
+          <div class="exp-context">Sole owner of an AI-enabled interview collection tool from architecture to working prototype</div>
+          <ul class="exp-bullets">
+            <li>Built a voice + text interview tool integrating Google Speech-to-Text and MongoDB, end-to-end</li>
+            <li>Designed and taught an NLP module for 180 undergraduate students on LLMs and intelligent systems</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-meta">
+          <div class="exp-company">HSE University</div>
+          <div class="exp-location">St Petersburg</div>
+          <div class="exp-period">Jan 2019 – Oct 2021</div>
+        </div>
+        <div>
+          <div class="exp-role">Content Product Manager</div>
+          <div class="exp-context">Co-designed and launched Russia's first HCI master's program</div>
+          <ul class="exp-bullets">
+            <li>Trained 100+ graduate students; ranked Top 20% of instructors and awarded Best Teacher</li>
+            <li>Built a peer-to-peer Q&A platform that reduced inbound requests across ~1,000 students</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TOOLS -->
+<section>
+  <div class="container fade">
+    <p class="section-eyebrow">Tools & stack</p>
+    <h2>What I work with.</h2>
+    <div class="tools-grid">
+      <span class="tool-tag">REST API</span>
+      <span class="tool-tag">GraphQL</span>
+      <span class="tool-tag">Stripe Connect</span>
+      <span class="tool-tag">Shopify</span>
+      <span class="tool-tag">Uber Direct</span>
+      <span class="tool-tag">n8n</span>
+      <span class="tool-tag">Claude API</span>
+      <span class="tool-tag">Postman</span>
+      <span class="tool-tag">SQL</span>
+      <span class="tool-tag">Python</span>
+      <span class="tool-tag">BigQuery</span>
+      <span class="tool-tag">Looker Studio</span>
+      <span class="tool-tag">Figma</span>
+      <span class="tool-tag">Linear</span>
+      <span class="tool-tag">Git</span>
+      <span class="tool-tag">Flask</span>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="cta-section">
+  <div class="container fade">
+    <h2>Let's make something work.</h2>
+    <p class="section-sub">Available for PM roles and consulting · Amsterdam area · Open to remote</p>
+    <a href="mailto:bulygindi@gmail.com" class="cta-email">
+      bulygindi@gmail.com →
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <span class="footer-copy">© 2026 Denis Bulygin</span>
+    <div class="footer-links">
+      <a href="tel:+31618595907">+31 618 595 907</a>
+      <a href="mailto:bulygindi@gmail.com">Email</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.fade').forEach(el => obs.observe(el));
+
+  // Fallback: reveal everything after 800ms in case observer doesn't fire
+  setTimeout(() => {
+    document.querySelectorAll('.fade').forEach(el => el.classList.add('visible'));
+  }, 800);
+</script>
+</body>
+</html>
