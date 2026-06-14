@@ -563,6 +563,25 @@
   }
   .footer-links a:hover { color: var(--black); }
 
+  /* TIER LABEL & INCLUDES */
+  .tier-label {
+    font-family: 'Geist Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 0.75rem;
+  }
+  .service-card.featured .tier-label { color: rgba(255,255,255,0.55); }
+  .service-includes {
+    font-size: 12px;
+    color: var(--text-subtle);
+    margin-bottom: 0.75rem;
+    font-style: italic;
+  }
+  .service-card.featured .service-includes { color: rgba(255,255,255,0.45); }
+
   /* FADE IN */
   .fade { opacity: 1; transform: none; }
 
@@ -723,14 +742,14 @@
 <section>
   <div class="container fade">
     <p class="section-eyebrow">Where I can help</p>
-    <h2>Pick your challenge.</h2>
-    <p class="section-sub">Whether you need a generalist or a specialist, here's what I bring to the table.</p>
+    <h2>Pick your scope.</h2>
+    <p class="section-sub">Each tier builds on the last — start anywhere, scale as needed.</p>
 
     <div class="services-grid">
       <div class="service-card">
-        <div class="service-icon">🔀</div>
-        <div class="service-name">A bit of everything</div>
-        <p class="service-tagline">From backend scoping to email marketing — full-stack PM for lean, fast-moving teams.</p>
+        <p class="tier-label">Tier 1</p>
+        <div class="service-name">Generalist</div>
+        <p class="service-tagline">Full-stack PM for lean, fast-moving teams. Discovery to delivery, across any domain.</p>
         <div class="service-divider"></div>
         <ul class="service-features">
           <li><span class="check">✓</span>Discovery & requirements</li>
@@ -743,11 +762,12 @@
       </div>
 
       <div class="service-card featured">
-        <div class="service-icon">⚡</div>
+        <p class="tier-label">Tier 2</p>
         <span class="service-badge">Core strength</span>
-        <div class="service-name">Data integrations</div>
+        <div class="service-name">+ Data integrations</div>
         <p class="service-tagline">API contracts, webhooks, and third-party connectivity built to survive production.</p>
         <div class="service-divider"></div>
+        <p class="service-includes">Everything in Tier 1, plus:</p>
         <ul class="service-features">
           <li><span class="check">✓</span>REST & GraphQL API design</li>
           <li><span class="check">✓</span>BDD acceptance scenarios</li>
@@ -759,10 +779,11 @@
       </div>
 
       <div class="service-card">
-        <div class="service-icon">💳</div>
-        <div class="service-name">Financial solutions</div>
+        <p class="tier-label">Tier 3</p>
+        <div class="service-name">+ Financial products</div>
         <p class="service-tagline">Payout engines, reconciliation, and compliance flows for marketplace finance.</p>
         <div class="service-divider"></div>
+        <p class="service-includes">Everything in Tier 2, plus:</p>
         <ul class="service-features">
           <li><span class="check">✓</span>Payout engine design</li>
           <li><span class="check">✓</span>Stripe Connect ownership</li>
