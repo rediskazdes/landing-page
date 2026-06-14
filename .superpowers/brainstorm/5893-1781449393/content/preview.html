@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Design Preview</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', sans-serif; background: #111; color: #fff; padding: 24px; }
+
+  .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 1100px; margin: 0 auto; }
+  .label { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #666; margin-bottom: 10px; }
+  .label.new { color: #6ee7b7; }
+  .pane { border-radius: 12px; overflow: hidden; border: 1px solid #222; }
+
+  /* ── CURRENT ─────────────────────────────────── */
+  .current { background: #fff; }
+  .c-nav { background: rgba(255,255,255,0.9); border-bottom: 1px solid #e5e5e5; padding: 0 24px; height: 44px; display: flex; align-items: center; justify-content: space-between; }
+  .c-nav-logo { font-size: 13px; font-weight: 600; color: #0a0a0a; }
+  .c-nav-cta { background: #0a0a0a; color: #fff; font-size: 11px; font-weight: 500; padding: 6px 14px; border-radius: 100px; }
+  .c-hero { padding: 32px 24px 24px; text-align: center; background: #fff; }
+  .c-badge { display: inline-flex; align-items: center; gap: 5px; background: rgba(49,93,166,0.12); color: #315DA6; font-size: 10px; font-weight: 500; padding: 4px 12px; border-radius: 100px; margin-bottom: 12px; }
+  .c-dot { width: 5px; height: 5px; border-radius: 50%; background: #22c55e; }
+  .c-h1 { font-size: 26px; font-weight: 600; letter-spacing: -0.03em; color: #0a0a0a; line-height: 1.1; margin-bottom: 8px; }
+  .c-h1 span { color: #315DA6; opacity: 0.5; }
+  .c-sub { font-size: 12px; color: #315DA6; margin-bottom: 16px; line-height: 1.6; }
+  .c-cta { display: inline-flex; align-items: center; gap: 5px; background: #0a0a0a; color: #fff; font-size: 11px; font-weight: 500; padding: 8px 20px; border-radius: 100px; }
+  .c-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: rgba(255,255,255,0.2); margin: 0; }
+  .c-stat { background: #315DA6; padding: 16px; }
+  .c-stat-num { font-size: 20px; font-weight: 600; letter-spacing: -0.04em; color: #fff; }
+  .c-stat-lbl { font-size: 9px; color: rgba(255,255,255,0.6); margin-top: 3px; line-height: 1.4; }
+  .c-cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; padding: 20px 24px; background: #fff; }
+  .c-card { background: #f9f9f9; border-radius: 8px; padding: 14px; }
+  .c-card.featured { background: #315DA6; }
+  .c-card-icon { font-size: 16px; margin-bottom: 8px; }
+  .c-card-name { font-size: 12px; font-weight: 600; color: #0a0a0a; margin-bottom: 4px; }
+  .c-card.featured .c-card-name { color: #fff; }
+  .c-card-desc { font-size: 10px; color: #315DA6; line-height: 1.5; }
+  .c-card.featured .c-card-desc { color: rgba(255,255,255,0.65); }
+
+  /* ── NEW ─────────────────────────────────────── */
+  .new { background: #f8f8f5; }
+  .n-nav { background: rgba(248,248,245,0.92); border-bottom: 1px solid #e8e8e4; padding: 0 24px; height: 44px; display: flex; align-items: center; justify-content: space-between; }
+  .n-nav-logo { font-size: 13px; font-weight: 600; color: #1a1a1a; }
+  .n-nav-cta { background: #1a1a1a; color: #fff; font-size: 11px; font-weight: 500; padding: 6px 14px; border-radius: 100px; }
+  .n-hero { padding: 32px 24px 24px; text-align: center; background: #f8f8f5; }
+  .n-badge { display: inline-flex; align-items: center; gap: 5px; background: rgba(49,93,166,0.1); color: #315DA6; font-size: 10px; font-weight: 500; padding: 4px 12px; border-radius: 100px; margin-bottom: 12px; }
+  .n-dot { width: 5px; height: 5px; border-radius: 50%; background: #22c55e; }
+  .n-h1 { font-size: 26px; font-weight: 600; letter-spacing: -0.03em; color: #1a1a1a; line-height: 1.1; margin-bottom: 8px; }
+  .n-h1 span { color: #1a1a1a; opacity: 0.22; }
+  .n-sub { font-size: 12px; color: #6b6b6b; margin-bottom: 16px; line-height: 1.6; }
+  .n-cta { display: inline-flex; align-items: center; gap: 5px; background: #1a1a1a; color: #fff; font-size: 11px; font-weight: 500; padding: 8px 20px; border-radius: 100px; }
+  .n-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: rgba(255,255,255,0.2); margin: 0; }
+  .n-stat { background: #315DA6; padding: 16px; }
+  .n-stat-num { font-size: 20px; font-weight: 600; letter-spacing: -0.04em; color: #fff; }
+  .n-stat-lbl { font-size: 9px; color: rgba(255,255,255,0.6); margin-top: 3px; line-height: 1.4; }
+  .n-cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; padding: 20px 24px; background: #f8f8f5; }
+  .n-card { background: #ffffff; border: 1px solid #e8e8e4; border-radius: 8px; padding: 14px; }
+  .n-card.featured { background: #315DA6; border-color: #315DA6; }
+  .n-card-eyebrow { font-size: 9px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: #315DA6; margin-bottom: 6px; }
+  .n-card.featured .n-card-eyebrow { color: rgba(255,255,255,0.6); }
+  .n-card-icon { font-size: 16px; margin-bottom: 8px; }
+  .n-card-name { font-size: 12px; font-weight: 600; color: #1a1a1a; margin-bottom: 4px; }
+  .n-card.featured .n-card-name { color: #fff; }
+  .n-card-desc { font-size: 10px; color: #6b6b6b; line-height: 1.5; }
+  .n-card.featured .n-card-desc { color: rgba(255,255,255,0.65); }
+
+  .title { font-size: 16px; font-weight: 600; color: #fff; text-align: center; margin-bottom: 24px; letter-spacing: -0.02em; }
+  .subtitle-note { font-size: 11px; color: #555; text-align: center; margin-bottom: 20px; }
+  .diff { margin-top: 20px; max-width: 1100px; margin: 20px auto 0; display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
+  .diff-item { background: #1a1a1a; border-radius: 8px; padding: 14px; }
+  .diff-label { font-size: 9px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #555; margin-bottom: 8px; }
+  .diff-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; font-size: 11px; }
+  .diff-from { color: #666; text-decoration: line-through; }
+  .diff-arrow { color: #555; }
+  .diff-to { color: #6ee7b7; font-weight: 500; }
+</style>
+</head>
+<body>
+
+<p class="title">Before vs After</p>
+<p class="subtitle-note">Both panels show the same page sections — hero, stats, service cards</p>
+
+<div class="compare">
+  <div>
+    <p class="label">Current</p>
+    <div class="pane current">
+      <div class="c-nav">
+        <span class="c-nav-logo">Denis Bulygin</span>
+        <span class="c-nav-cta">Get in touch</span>
+      </div>
+      <div class="c-hero">
+        <div class="c-badge"><span class="c-dot"></span> Open to opportunities · Amsterdam</div>
+        <div class="c-h1">Product thinking for platforms <span>that actually ship.</span></div>
+        <div class="c-sub">4+ years in product, 4 in data. I own marketplace platforms end-to-end — from discovery to delivery, across payments, integrations, and operations.</div>
+        <span class="c-cta">Say hello →</span>
+      </div>
+      <div class="c-stats">
+        <div class="c-stat"><div class="c-stat-num">99.9%</div><div class="c-stat-lbl">Payout accuracy across six-digit monthly volumes</div></div>
+        <div class="c-stat"><div class="c-stat-num">+14%</div><div class="c-stat-lbl">B2C conversion lift from a 12-month CRO roadmap</div></div>
+        <div class="c-stat"><div class="c-stat-num">180+</div><div class="c-stat-lbl">Students trained on NLP and large language models</div></div>
+      </div>
+      <div class="c-cards">
+        <div class="c-card"><div class="c-card-icon">🔀</div><div class="c-card-name">A bit of everything</div><div class="c-card-desc">Full-stack PM for lean, fast-moving teams.</div></div>
+        <div class="c-card featured"><div class="c-card-icon">⚡</div><div class="c-card-name">Data integrations</div><div class="c-card-desc">API contracts, webhooks, and third-party connectivity.</div></div>
+        <div class="c-card"><div class="c-card-icon">💳</div><div class="c-card-name">Financial solutions</div><div class="c-card-desc">Payout engines, reconciliation, and compliance flows.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <p class="label new">Redesigned</p>
+    <div class="pane new">
+      <div class="n-nav">
+        <span class="n-nav-logo">Denis Bulygin</span>
+        <span class="n-nav-cta">Get in touch</span>
+      </div>
+      <div class="n-hero">
+        <div class="n-badge"><span class="n-dot"></span> Open to opportunities · Amsterdam</div>
+        <div class="n-h1">Product thinking for platforms <span>that actually ship.</span></div>
+        <div class="n-sub">4+ years in product, 4 in data. I own marketplace platforms end-to-end — from discovery to delivery, across payments, integrations, and operations.</div>
+        <span class="n-cta">Say hello →</span>
+      </div>
+      <div class="n-stats">
+        <div class="n-stat"><div class="n-stat-num">99.9%</div><div class="n-stat-lbl">Payout accuracy across six-digit monthly volumes</div></div>
+        <div class="n-stat"><div class="n-stat-num">+14%</div><div class="n-stat-lbl">B2C conversion lift from a 12-month CRO roadmap</div></div>
+        <div class="n-stat"><div class="n-stat-num">180+</div><div class="n-stat-lbl">Students trained on NLP and large language models</div></div>
+      </div>
+      <div class="n-cards">
+        <div class="n-card"><div class="n-card-eyebrow">General</div><div class="n-card-icon">🔀</div><div class="n-card-name">A bit of everything</div><div class="n-card-desc">Full-stack PM for lean, fast-moving teams.</div></div>
+        <div class="n-card featured"><div class="n-card-eyebrow">Core strength</div><div class="n-card-icon">⚡</div><div class="n-card-name">Data integrations</div><div class="n-card-desc">API contracts, webhooks, and third-party connectivity.</div></div>
+        <div class="n-card"><div class="n-card-eyebrow">Finance</div><div class="n-card-icon">💳</div><div class="n-card-name">Financial solutions</div><div class="n-card-desc">Payout engines, reconciliation, and compliance flows.</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="diff">
+  <div class="diff-item">
+    <div class="diff-label">Background</div>
+    <div class="diff-row"><span class="diff-from">#ffffff white</span><span class="diff-arrow">→</span><span class="diff-to">#f8f8f5 warm off-white</span></div>
+  </div>
+  <div class="diff-item">
+    <div class="diff-label">Secondary text</div>
+    <div class="diff-row"><span class="diff-from">blue #315DA6</span><span class="diff-arrow">→</span><span class="diff-to">grey #6b6b6b</span></div>
+  </div>
+  <div class="diff-item">
+    <div class="diff-label">Cards</div>
+    <div class="diff-row"><span class="diff-from">grey fill #f9f9f9</span><span class="diff-arrow">→</span><span class="diff-to">white + grey border</span></div>
+  </div>
+</div>
+
+</body>
+</html>

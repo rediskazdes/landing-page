@@ -6,21 +6,21 @@
 <title>Denis Bulygin — Product Owner v2</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Plus+Jakarta+Sans:ital,wght@0,600;0,700;1,700;1,800&family=Geist+Mono:wght@500&display=swap" rel="stylesheet" />
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --black: #0a0a0a;
+    --black: #1a1a1a;
     --white: #ffffff;
-    --blue: #315DA6;
-    --blue-dark: #274d8c;
-    --blue-light: rgba(49,93,166,0.12);
-    --gray-50: #f9f9f9;
-    --gray-100: #f2f2f2;
-    --gray-200: #e5e5e5;
-    --gray-400: #315DA6;
-    --gray-600: #315DA6;
+    --bg: #f8f8f5;
+    --blue: #2563EB;
+    --blue-dark: #1d4ed8;
+    --blue-light: rgba(37,99,235,0.1);
+    --gray-100: #f0f0ec;
+    --gray-200: #e8e8e4;
+    --text-muted: #6b6b6b;
+    --text-subtle: #9b9b9b;
     --radius: 12px;
     --radius-sm: 8px;
     --radius-pill: 100px;
@@ -29,8 +29,8 @@
   html { scroll-behavior: smooth; }
 
   body {
-    font-family: 'Inter', -apple-system, sans-serif;
-    background: var(--white);
+    font-family: 'Inter Tight', -apple-system, sans-serif;
+    background: var(--bg);
     color: var(--black);
     font-size: 16px;
     line-height: 1.6;
@@ -42,7 +42,7 @@
     position: sticky;
     top: 0;
     z-index: 100;
-    background: rgba(255,255,255,0.9);
+    background: rgba(248,248,245,0.92);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--gray-200);
@@ -57,9 +57,10 @@
     justify-content: space-between;
   }
   .nav-logo {
+    font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 15px;
-    font-weight: 600;
-    letter-spacing: -0.01em;
+    font-weight: 700;
+    letter-spacing: -0.02em;
     color: var(--black);
     text-decoration: none;
   }
@@ -93,11 +94,13 @@
     gap: 6px;
     background: var(--blue-light);
     color: var(--blue);
-    font-size: 13px;
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px;
     font-weight: 500;
     padding: 6px 16px;
     border-radius: var(--radius-pill);
     margin-bottom: 2rem;
+    letter-spacing: 0;
   }
   .hero-badge .dot {
     width: 6px; height: 6px;
@@ -105,19 +108,21 @@
     background: #22c55e;
   }
   h1 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: clamp(40px, 6vw, 72px);
-    font-weight: 600;
-    letter-spacing: -0.03em;
-    line-height: 1.05;
+    font-weight: 800;
+    font-style: italic;
+    letter-spacing: -0.04em;
+    line-height: 1.0;
     margin-bottom: 1.5rem;
     max-width: 800px;
     margin-left: auto;
     margin-right: auto;
   }
-  h1 span { color: var(--blue); opacity: 0.5; }
+  h1 span { color: var(--blue); opacity: 0.25; font-style: italic; }
   .hero-sub {
     font-size: 18px;
-    color: var(--blue);
+    color: var(--text-muted);
     max-width: 520px;
     margin: 0 auto 2.5rem;
     line-height: 1.6;
@@ -147,13 +152,13 @@
   }
   .trusted-label {
     text-align: center;
-    font-size: 11px;
+    font-family: 'Geist Mono', monospace;
+    font-size: 10px;
     font-weight: 500;
-    color: var(--blue);
+    color: var(--text-subtle);
     letter-spacing: 0.12em;
     text-transform: uppercase;
     margin-bottom: 2rem;
-    opacity: 0.6;
   }
   .carousel-track-wrap {
     position: relative;
@@ -170,11 +175,11 @@
   }
   .carousel-track-wrap::before {
     left: 0;
-    background: linear-gradient(to right, #fff 0%, transparent 100%);
+    background: linear-gradient(to right, #f8f8f5 0%, transparent 100%);
   }
   .carousel-track-wrap::after {
     right: 0;
-    background: linear-gradient(to left, #fff 0%, transparent 100%);
+    background: linear-gradient(to left, #f8f8f5 0%, transparent 100%);
   }
   .carousel-track {
     display: flex;
@@ -199,17 +204,17 @@
     flex-shrink: 0;
   }
   .carousel-logo {
-    font-size: 20px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 18px;
     font-weight: 700;
     letter-spacing: -0.03em;
-    color: var(--blue);
+    color: var(--black);
     line-height: 1;
     margin-bottom: 5px;
   }
   .carousel-sub {
     font-size: 11px;
-    color: var(--blue);
-    opacity: 0.5;
+    color: var(--text-subtle);
     letter-spacing: 0.02em;
     white-space: nowrap;
   }
@@ -235,8 +240,9 @@
     padding: 48px 40px;
   }
   .stat-num {
+    font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 52px;
-    font-weight: 600;
+    font-weight: 800;
     letter-spacing: -0.04em;
     line-height: 1;
     margin-bottom: 12px;
@@ -251,9 +257,10 @@
 
   /* SECTION HEADINGS */
   .section-eyebrow {
-    font-size: 13px;
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px;
     font-weight: 500;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--blue);
     margin-bottom: 1rem;
@@ -262,15 +269,17 @@
     color: rgba(255,255,255,0.6);
   }
   h2 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: clamp(28px, 4vw, 44px);
-    font-weight: 600;
-    letter-spacing: -0.03em;
-    line-height: 1.1;
+    font-weight: 800;
+    font-style: italic;
+    letter-spacing: -0.04em;
+    line-height: 1.05;
     margin-bottom: 1rem;
   }
   .section-sub {
     font-size: 17px;
-    color: var(--blue);
+    color: var(--text-muted);
     max-width: 500px;
     line-height: 1.6;
     margin-bottom: 3rem;
@@ -283,24 +292,26 @@
     gap: 1.5rem;
   }
   .service-card {
-    background: var(--gray-50);
+    background: var(--white);
+    border: 1px solid var(--gray-200);
     border-radius: var(--radius);
     padding: 2rem;
     display: flex;
     flex-direction: column;
-    transition: background 0.2s;
+    transition: border-color 0.2s;
   }
-  .service-card:hover { background: var(--blue-light); }
+  .service-card:hover { border-color: var(--blue); }
   .service-card.featured {
     background: var(--blue);
+    border-color: var(--blue);
     color: var(--white);
   }
-  .service-card.featured:hover { background: var(--blue-dark); }
+  .service-card.featured:hover { background: var(--blue-dark); border-color: var(--blue-dark); }
   .service-icon {
     width: 40px;
     height: 40px;
     border-radius: var(--radius-sm);
-    background: #e5e5e5;
+    background: var(--gray-200);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -313,9 +324,10 @@
   }
   .service-badge {
     display: inline-block;
-    font-size: 11px;
+    font-family: 'Geist Mono', monospace;
+    font-size: 10px;
     font-weight: 500;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     padding: 4px 10px;
     background: rgba(255,255,255,0.15);
@@ -324,14 +336,15 @@
     color: rgba(255,255,255,0.7);
   }
   .service-name {
+    font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 20px;
-    font-weight: 600;
-    letter-spacing: -0.02em;
+    font-weight: 700;
+    letter-spacing: -0.03em;
     margin-bottom: 0.5rem;
   }
   .service-tagline {
     font-size: 14px;
-    color: var(--blue);
+    color: var(--text-muted);
     line-height: 1.6;
     margin-bottom: 1.5rem;
     flex-grow: 1;
@@ -346,7 +359,7 @@
   .service-features { list-style: none; }
   .service-features li {
     font-size: 13px;
-    color: var(--blue);
+    color: var(--text-muted);
     padding: 5px 0;
     display: flex;
     align-items: flex-start;
@@ -380,10 +393,10 @@
     border-top: 1px solid rgba(255,255,255,0.15);
   }
   .exp-item:first-child { border-top: none; }
-  .exp-meta { }
   .exp-company {
+    font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 700;
     margin-bottom: 4px;
     color: var(--white);
   }
@@ -392,14 +405,16 @@
     color: rgba(255,255,255,0.5);
   }
   .exp-period {
-    font-size: 13px;
-    color: rgba(255,255,255,0.5);
-    margin-top: 2px;
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px;
+    color: rgba(255,255,255,0.4);
+    margin-top: 4px;
   }
   .exp-role {
-    font-size: 16px;
-    font-weight: 600;
-    letter-spacing: -0.01em;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
     margin-bottom: 6px;
     color: var(--white);
   }
@@ -428,10 +443,10 @@
   .experience-section .section-eyebrow { color: rgba(255,255,255,0.6); }
 
   /* TEAM */
-  .team-section { background: var(--white); }
+  .team-section { background: var(--bg); }
   .team-grid {
     display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 1.25rem;
     margin-top: 2.5rem;
   }
@@ -459,21 +474,18 @@
     width: 100%; height: 100%;
     object-fit: cover;
   }
-  .team-avatar.claude-card {
-    background: var(--gray-100);
-    border: none;
-  }
   .team-name {
+    font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 14px;
-    font-weight: 600;
-    letter-spacing: -0.01em;
+    font-weight: 700;
+    letter-spacing: -0.02em;
     color: var(--black);
     margin-bottom: 2px;
   }
   .team-role {
     font-size: 12px;
     font-weight: 400;
-    color: var(--blue);
+    color: var(--text-muted);
     line-height: 1.4;
     text-align: center;
   }
@@ -486,7 +498,7 @@
   }
 
   @media (max-width: 768px) {
-    .team-grid { grid-template-columns: repeat(3, 1fr); }
+    .team-grid { grid-template-columns: repeat(2, 1fr); }
   }
   .tools-grid {
     display: flex;
@@ -495,13 +507,14 @@
     margin-top: 2rem;
   }
   .tool-tag {
-    font-size: 13px;
+    font-family: 'Geist Mono', monospace;
+    font-size: 12px;
     font-weight: 500;
     padding: 7px 16px;
-    background: var(--gray-100);
+    background: var(--white);
+    border: 1px solid var(--gray-200);
     border-radius: var(--radius-pill);
-    color: var(--blue);
-    font-family: 'SF Mono', 'Fira Code', monospace;
+    color: var(--text-muted);
   }
 
   /* FINAL CTA */
@@ -532,6 +545,7 @@
   footer {
     border-top: 1px solid var(--gray-200);
     padding: 2rem;
+    background: var(--bg);
   }
   .footer-inner {
     max-width: 1100px;
@@ -540,11 +554,11 @@
     justify-content: space-between;
     align-items: center;
   }
-  .footer-copy { font-size: 13px; color: var(--blue); }
+  .footer-copy { font-size: 13px; color: var(--text-subtle); }
   .footer-links { display: flex; gap: 1.5rem; }
   .footer-links a {
     font-size: 13px;
-    color: var(--blue);
+    color: var(--text-muted);
     text-decoration: none;
   }
   .footer-links a:hover { color: var(--black); }
